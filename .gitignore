@@ -1,0 +1,5 @@
+/virtenv
+__pycache__/
+/sys.py
+/media/
+/users_data.txt
