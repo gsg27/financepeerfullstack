@@ -20,9 +20,11 @@ from webapp import views
 
 router = routers.DefaultRouter()
 router.register(r'blogs', views.BlogView,'blog')
+# router.register(r'auth',include('authentication.urls'))
 
 urlpatterns = [
     path('', views.index, name='index'),
     path('api/',include(router.urls)),
     path('admin/', admin.site.urls),
+    path('auth/',include('authentication.urls'))
 ]
