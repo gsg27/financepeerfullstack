@@ -19,12 +19,14 @@ from rest_framework import routers
 from webapp import views
 
 router = routers.DefaultRouter()
-router.register(r'blogs', views.BlogView,'blog')
+router.register(r'blogs', views.BlogView,'blog'),
+# router.register(r'upload',views.FileUploadView,'upload')
 # router.register(r'auth',include('authentication.urls'))
 
 urlpatterns = [
     path('', views.index, name='index'),
     path('api/',include(router.urls)),
     path('admin/', admin.site.urls),
-    path('auth/',include('authentication.urls'))
+    path('auth/',include('authentication.urls')),
+    path('api/upload/',views.FileUploadView.as_view(),name='upload')
 ]

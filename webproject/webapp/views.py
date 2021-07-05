@@ -1,9 +1,29 @@
 from django.shortcuts import render
-from .serializers import BlogSerializer
-from rest_framework import viewsets
-from .models import Blog
+from .serializers import BlogSerializer, FileSerializer
+from rest_framework import viewsets,parsers,views,response,status
+from .models import Blog,File
 from .forms import UploadForm
 import json
+
+
+class FileUploadView(views.APIView):
+    parser_class = (parsers.MultiPartParser, parsers.FormParser)
+    serializer_class = FileSerializer   
+    # queryset = File.objects.all()  
+
+    def post(self, request, format=None):
+        # my_file = request.FILES['file']
+        # print(my_file)
+        handle_uploaded_file(request.FILES['file'])
+        return response.Response(status=status.HTTP_201_CREATED)
+        # filename = 'data'
+        # with open(filename, 'wb+') as temp_file:
+        #     for chunk in my_file.chunks():
+        #         temp_file.write(chunk)
+
+        # my_saved_file = open(filename) #there you go
+
+
 
 def index(request):
     
